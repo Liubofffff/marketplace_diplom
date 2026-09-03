@@ -1,5 +1,6 @@
 import psycopg2
 
+
 # Класс для работы с PostgreSQL базой данных
 class PGDatabase:
     # Соединение с БД и настройка курсора
@@ -19,11 +20,16 @@ class PGDatabase:
         self.cursor = self.connection.cursor()
         self.connection.autocommit = True
 
-    # Выполнение запроса на изменение данных
-    def post(self, query, args=()):
+    def post_many(self, query, data_list):
         try:
-            self.cursor.execute(query, args)
-            return True
+            self.cursor.executemany(query, data_list)
+            if self.connection.autocommit:
+                return self.cursor.rowcount
+            else:
+                self.connection.commit()
+                return self.cursor.rowcount
         except Exception as err:
+            if not self.connection.autocommit:
+                self.connection.rollback()
             print(repr(err))
-            return False
+            return 0
