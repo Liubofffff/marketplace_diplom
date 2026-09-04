@@ -45,7 +45,7 @@ def run_load_day(date_str, script_path='load_day.py'):
 
 
 def main():
-    # Исправлено: теперь это строки, а не datetime объекты
+    # Период, за который нужны данные
     start_date_str = '2023-12-30'
     end_date_str = '2023-12-30'
 
@@ -69,7 +69,7 @@ def main():
         else:
             error_count += 1
 
-    # Исправлено: выводим статистику ПОСЛЕ цикла, а не внутри него
+    # Выводим статистику после цикла
     print("\n" + "=" * 50)
     print(f"Итоги выполнения:")
     print(f"  Успешно: {success_count}")

@@ -20,6 +20,7 @@ class PGDatabase:
         self.cursor = self.connection.cursor()
         self.connection.autocommit = True
 
+    # массовая вставка данных из массива
     def post_many(self, query, data_list):
         try:
             self.cursor.executemany(query, data_list)
