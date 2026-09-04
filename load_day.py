@@ -30,7 +30,7 @@ db = PGDatabase(
     host=config['Database']['host'],
     database=config['Database']['name'],
     user=config['Database']['user'],
-    password=getenv('DB_PASSWORD'),
+    password=getenv('POSTGRES_PASSWORD'),
 )
 
 # определяем SQL-запрос с параметрами
