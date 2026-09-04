@@ -1,4 +1,5 @@
 #!.venv/bin/python
+# Загрузка предыдущего дня
 from sys import argv, exit
 from os import getenv
 import configparser
