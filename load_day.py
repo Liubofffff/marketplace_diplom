@@ -1,11 +1,14 @@
 #!.venv/bin/python
 # Загрузка предыдущего дня
 from sys import argv, exit
+from dotenv import load_dotenv
 from os import getenv
 import configparser
 from datetime import date, timedelta
 from pgdb import PGDatabase
 import requests
+
+load_dotenv()
 
 # берём данные из конфига
 config = configparser.ConfigParser()
