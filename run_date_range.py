@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!.venv/bin/python
 # Загрузка исторических данных
 import sys
 import subprocess
