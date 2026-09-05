@@ -1,0 +1,1 @@
+docker exec -i postgres psql -U liu -d marketplace_db < sales.sql
