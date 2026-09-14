@@ -347,11 +347,7 @@ ABC-анализ реализован с использованием оконн
 
 http://192.168.1.134:3000/public/dashboard/4e00d1ab-edb5-4626-906f-361339af3a01
 
-Скриншот дашборда:
 
-```markdown
-![Metabase Dashboard](./docs/dashboard.png)
-```
 
 
 ---
