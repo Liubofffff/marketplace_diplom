@@ -350,7 +350,7 @@ ABC-анализ реализован с использованием оконн
 Скриншот дашборда:
 
 ```markdown
-![Metabase Dashboard](../images/1.png)
+![Metabase Dashboard](images/1.png)
 
 ```
 
