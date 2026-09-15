@@ -46,8 +46,8 @@ def run_load_day(date_str, script_path='load_day.py'):
 
 def main():
     # Период, за который нужны данные
-    start_date_str = '2022-12-28'
-    end_date_str = '2026-09-04'
+    start_date_str = '2026-09-05'
+    end_date_str = '2026-09-10'
 
     # Преобразуем строки в datetime объекты
     start_date = datetime.strptime(start_date_str, '%Y-%m-%d')
