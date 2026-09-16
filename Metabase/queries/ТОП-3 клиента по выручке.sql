@@ -1,5 +1,5 @@
 SELECT
-  COUNT(DISTINCT client_id) AS unique_clients,
+  client_id,
   SUM(total_price) AS revenue
 FROM sales
 WHERE true
@@ -7,6 +7,6 @@ WHERE true
   [[AND {{purchase_datetime}}]]
   [[AND {{gender}}]]
   [[AND {{client_id}}]]
-GROUP BY product_id
-ORDER BY revenue DESC
+GROUP BY client_id
+ORDER BY revenue DESC, client_id
 LIMIT 3;
