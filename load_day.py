@@ -7,8 +7,12 @@ import configparser
 from datetime import date, timedelta
 from pgdb import PGDatabase
 import requests
+import logging
 
 load_dotenv()
+
+# настройка логирования
+logging.basicConfig(filename="loader.log")
 
 # берём данные из конфига
 config = configparser.ConfigParser()
@@ -62,4 +66,4 @@ for item in response.json():
 
 # вставляем данные и выводим результат
 rows_inserted = db.post_many(SQL_QUERY, data_to_insert)
-print(f"Данные за: {yesterday}. Вставлено строк: {rows_inserted}")
+logging.info(f"Данные за: {yesterday}. Вставлено строк: {rows_inserted}")
