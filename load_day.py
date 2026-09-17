@@ -1,6 +1,6 @@
 #!.venv/bin/python
 # Загрузка предыдущего дня
-from sys import argv, exit
+from sys import argv
 from dotenv import load_dotenv
 from os import getenv
 import configparser
@@ -26,11 +26,32 @@ if len(argv) > 1:
 else:
     yesterday = (date.today() - timedelta(days=1)).isoformat()
 
-# запрашиваем данные через API
-response = requests.get(apiUrl, params={'date': yesterday})
+data = []
 
-if response.status_code != 200:
-    exit(f"Ошибка получения данных за {yesterday}")
+# запрашиваем данные через API
+try:
+    response = requests.get(
+        apiUrl,
+        params={'date': yesterday},
+        timeout=(5, 30)
+    )
+
+    response.raise_for_status()
+
+except requests.exceptions.Timeout:
+    print("Превышено время ожидания запроса")
+
+except requests.exceptions.ConnectionError:
+    print("Ошибка соединения с сервером")
+
+except requests.exceptions.HTTPError as e:
+    print(f"Ошибка HTTP: {e}")
+
+except requests.exceptions.RequestException as e:
+    print(f"Ошибка запроса: {e}")
+
+else:
+    data = response.json()
 
 # создаём подключение к базе данных
 db = PGDatabase(
@@ -46,11 +67,12 @@ SQL_QUERY = """
     (client_id, discount_per_item, gender, price_per_item, product_id, purchase_datetime, 
     purchase_time_as_seconds_from_midnight, quantity, total_price)
     VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
+    ON CONFLICT DO NOTHING;
 """
 
 # заполняем данные для массовой вставки
 data_to_insert = []
-for item in response.json():
+for item in data:
     values = (
         item['client_id'],
         item['discount_per_item'],

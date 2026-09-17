@@ -23,14 +23,15 @@ def run_load_day(date_str, script_path='load_day.py'):
             [sys.executable, script_path, date_str],
             capture_output=True,
             text=True,
-            check=False
+            check=False,
+            timeout=180  # таймаут 3 минуты
         )
 
         # Выводим stdout и stderr
         if result.stdout:
             logging.info(result.stdout)
         if result.stderr:
-            logging.info(result.stderr, file=sys.stderr)
+            logging.info(result.stderr)
 
         if result.returncode != 0:
             logging.error(f"Ошибка при выполнении для даты {date_str}. Код возврата: {result.returncode}")
